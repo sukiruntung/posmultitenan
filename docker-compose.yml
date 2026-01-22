@@ -6,6 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: laravel-app-multinenan
+        restart: unless-stopped
         working_dir: /var/www/html
         volumes:
             - ./:/var/www/html:cached
@@ -17,10 +18,26 @@ services:
         build:
             context: .
         container_name: laravel-app-multinenan-queue
+        restart: unless-stopped
         working_dir: /var/www/html
         command: php artisan queue:work --sleep=3 --tries=3
         depends_on:
             - app
+        networks:
+            - postexample_default
+
+    n8n:
+        image: n8nio/n8n
+        ports:
+            - "5678:5678"
+        restart: unless-stopped
+        environment:
+            - N8N_BASIC_AUTH_ACTIVE=true
+            - N8N_BASIC_AUTH_USER=admin
+            - N8N_BASIC_AUTH_PASSWORD=admin123
+            - TZ=Asia/Jakarta
+        volumes:
+            - /opt/n8n/data:/home/node/.n8n
         networks:
             - postexample_default
 
