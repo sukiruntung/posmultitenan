@@ -1,0 +1,16 @@
+body {
+    background-image: url('../images/logo.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+.fi-simple-page {
+    background: rgba(0, 0, 0, 0.6) !important;
+    min-height: 100vh !important;
+}
+
+.fi-simple-main {
+    background: transparent !important;
+}

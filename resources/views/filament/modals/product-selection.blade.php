@@ -1,0 +1,71 @@
+<div>
+    <!-- Radio Button untuk Pencarian -->
+    <div class="mb-4">
+        <div class="flex gap-4 mb-3">
+            <label class="flex items-center">
+                <input type="radio" wire:model.live="searchType" value="product_name" class="mr-2">
+                <span class="text-sm font-medium">Cari berdasarkan Nama Produk</span>
+            </label>
+            <label class="flex items-center">
+                <input type="radio" wire:model.live="searchType" value="product_catalog" class="mr-2">
+                <span class="text-sm font-medium">Cari berdasarkan Katalog Produk</span>
+            </label>
+        </div>
+        
+        <!-- Input Pencarian -->
+        <input 
+            type="text" 
+            wire:model.live.debounce.300ms="searchTerm"
+            placeholder="{{ $searchType === 'product_catalog' ? 'Masukkan katalog produk...' : 'Masukkan nama produk...' }}"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+    </div>
+
+    <!-- Tabel Produk -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Katalog Produk
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Nama Produk
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Aksi
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                @forelse($products as $product)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{ $product->product_catalog ?? '-' }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">{{ $product->product_name }}</div>
+                            <div class="text-sm text-gray-500">
+                                {{ $product->merk->merk_name ?? '' }} - {{ $product->satuan->satuan_name ?? '' }}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button 
+                                wire:click="addProduct({{ $product->id }})"
+                                class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            >
+                                Tambah
+                            </button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500">
+                            Tidak ada produk ditemukan
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-app-multinenan
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html:cached
+        command: php-fpm
+        networks:
+            - postexample_default
+
+    queue:
+        build:
+            context: .
+        container_name: laravel-app-multinenan-queue
+        working_dir: /var/www/html
+        command: php artisan queue:work --sleep=3 --tries=3
+        depends_on:
+            - app
+        networks:
+            - postexample_default
+
+networks:
+    postexample_default:
+        external: true
+        name: postexample_default # 🔥 network dari docker-compose lama

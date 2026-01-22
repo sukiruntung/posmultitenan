@@ -1,0 +1,12 @@
+.fi-simple-main-ctn {
+    background-image: url("/images/background-login3.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+.fi-simple-main {
+    background-color: red;
+}
+.reportModal {
+    height: 700px;
+}

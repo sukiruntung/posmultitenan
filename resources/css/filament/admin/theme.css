@@ -1,0 +1,6 @@
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+@config 'tailwind.config.js';
+.fi-simple-main-ctn {
+    @apply bg-cyan-100/50;
+}
