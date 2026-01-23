@@ -31,7 +31,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+WORKDIR /var/www/app2
 
 COPY . .
 
