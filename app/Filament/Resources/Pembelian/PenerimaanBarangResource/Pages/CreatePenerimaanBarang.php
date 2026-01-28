@@ -204,7 +204,7 @@ class CreatePenerimaanBarang extends CreateRecord
                     'penerimaan_barang_id' => $penerimaan->id,
                     'product_id' => $detailproduct['id'],
                     'penerimaan_barang_detailproduct_name' => $detailproduct['name'],
-                    'penerimaan_barang_detail_sn' => $detailproduct['sn'],
+                    'penerimaan_barang_detail_sn' => $detailproduct['sn'] ?: null,
                     'penerimaan_barang_detail_ed' => $detailproduct['ed'] ?: null,
                     'penerimaan_barang_detail_qty' => $detailproduct['qty'],
                     'penerimaan_barang_detail_price' => $detailproduct['harga'],

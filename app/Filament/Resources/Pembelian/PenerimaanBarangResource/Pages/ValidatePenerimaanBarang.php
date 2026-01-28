@@ -77,11 +77,13 @@ class ValidatePenerimaanBarang extends EditRecord
     {
         DB::transaction(function () use ($data) {
             foreach ($this->products as $detail) {
+                $sn = empty($detail['sn']) ? null : $detail['sn'];
+                $ed = empty($detail['ed']) ? null : $detail['ed'];
                 $productStock = ProductStock::firstOrCreate(
                     [
                         'product_id'       => $detail['id'],
-                        'product_stock_sn' => $detail['sn'],
-                        'product_stock_ed' => $detail['ed'],
+                        'product_stock_sn' => $sn,
+                        'product_stock_ed' => $ed,
                     ],
                     [
                         'stock'   => 0,
