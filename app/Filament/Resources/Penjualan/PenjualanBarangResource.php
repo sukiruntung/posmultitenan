@@ -230,7 +230,7 @@ class PenjualanBarangResource extends Resource
 
                         $db = config('database.connections.mysql.database');
 
-                        $url = "{$host}/rpt/?r={$db}/rpt_penjualanbarang&d=postexample&p=PID&v={$record->id}&t=s|s&u={$username}&f=pdf&tm=" . now()->format('YmdHis');
+                        $url = "{$host}/rpt/?r=postexample/rpt_penjualanbarang&d={$db}&p=PID&v={$record->id}&t=s|s&u={$username}&f=pdf&tm=" . now()->format('YmdHis');
 
                         return view('filament.layouts.modals.report', compact('url'));
                     })
@@ -294,7 +294,7 @@ class PenjualanBarangResource extends Resource
                         }
                         $db = config('database.connections.mysql.database');
 
-                        $url = "{$host}/rpt/?r={$db}/rpt_fakturbarang&d=postexample&p=PID&v={$record->id}&t=s|s&u={$username}&f=pdf&tm=" . now()->format('YmdHis');
+                        $url = "{$host}/rpt/?r=postexample/rpt_fakturbarang&d={$db}&p=PID&v={$record->id}&t=s|s&u={$username}&f=pdf&tm=" . now()->format('YmdHis');
 
                         return view('filament.layouts.modals.report', compact('url'));
                     })
