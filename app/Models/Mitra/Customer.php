@@ -33,6 +33,6 @@ class Customer extends Model
     }
     public function customerMarketing()
     {
-        return $this->hasOne(customerMarketing::class, 'customer_id', 'id');
+        return $this->hasOne(CustomerMarketing::class, 'customer_id', 'id');
     }
 }
