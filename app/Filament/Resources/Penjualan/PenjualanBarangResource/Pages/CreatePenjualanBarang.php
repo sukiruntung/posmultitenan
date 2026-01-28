@@ -213,11 +213,8 @@ class CreatePenjualanBarang extends CreateRecord
 
             $data['user_id'] = Auth::id();
             $data['penjualan_barang_no'] = NumberGenerator::generate($data['transaction_type'], $data['outlet_id']);
-            dd($data);
             unset($data['transaction_type']);
-            dd($data);
             $penerimaan = PenjualanPenjualanBarang::create($data);
-            dd($data['products']);
             foreach ($data['products'] as $detailproduct) {
 
                 if ($detailproduct['qty'] <= 0) {
@@ -244,7 +241,6 @@ class CreatePenjualanBarang extends CreateRecord
                     'user_id' =>  $data['user_id'],
                 ]);
             }
-            dd('kene');
             session()->forget('list_productsPenjualan');
             return $penerimaan;
         });
