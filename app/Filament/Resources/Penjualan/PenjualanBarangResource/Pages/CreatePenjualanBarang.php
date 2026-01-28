@@ -215,9 +215,9 @@ class CreatePenjualanBarang extends CreateRecord
             $data['penjualan_barang_no'] = NumberGenerator::generate($data['transaction_type'], $data['outlet_id']);
             unset($data['transaction_type']);
             $penerimaan = PenjualanPenjualanBarang::create($data);
-
+            dd($data['products']);
             foreach ($data['products'] as $detailproduct) {
-                dd($detailproduct);
+
                 if ($detailproduct['qty'] <= 0) {
                     Notification::make()
                         ->title('Gagal menyimpan')
