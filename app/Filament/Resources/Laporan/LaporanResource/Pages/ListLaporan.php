@@ -195,6 +195,7 @@ class ListLaporan extends Page
             $host .= ":{$port}";
         }
 
+        $db = config('database.connections.mysql.database');
         $laporanId = $this->data['laporan_id'];
         $params = $this->laporanParams[$laporanId] ?? [];
 
@@ -210,7 +211,7 @@ class ListLaporan extends Page
 
         $this->url =
             "{$host}/rpt/?r={$this->data['path']}"
-            . "&d=postexample"
+            . "&d={$db}"
             . "&p=" . implode('|', $paramNames)
             . "&t=" . implode('|', $paramTypes)
             . "&v=" . implode('|', $paramValues)
