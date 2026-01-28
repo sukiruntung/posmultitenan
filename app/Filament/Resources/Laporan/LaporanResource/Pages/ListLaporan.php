@@ -191,7 +191,7 @@ class ListLaporan extends Page
         $username = auth()->user()->name;
         $host = request()->getScheme() . '://' . request()->getHost();
 
-        if ($port = env('PORT_REPORT')) {
+        if ($port = config('app.report_port')) {
             $host .= ":{$port}";
         }
 

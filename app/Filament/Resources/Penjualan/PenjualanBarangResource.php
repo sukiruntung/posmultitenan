@@ -223,7 +223,7 @@ class PenjualanBarangResource extends Resource
                     ->modalContent(function ($record) {
                         $username = static::user()->name;
                         $host = request()->getScheme() . '://' . request()->getHost();
-                        $port = env('PORT_REPORT');
+                        $port = config('app.report_port');
                         if (!empty($port)) {
                             $host .= ":{$port}";
                         }
@@ -286,7 +286,7 @@ class PenjualanBarangResource extends Resource
                     ->modalContent(function ($record) {
                         $username = static::user()->name;
                         $host = request()->getScheme() . '://' . request()->getHost();
-                        $port = env('PORT_REPORT');
+                        $port = config('app.report_port');
                         if (!empty($port)) {
                             $host .= ":{$port}";
                         }
