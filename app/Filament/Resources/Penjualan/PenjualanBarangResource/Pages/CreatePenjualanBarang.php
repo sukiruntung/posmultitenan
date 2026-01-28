@@ -217,6 +217,7 @@ class CreatePenjualanBarang extends CreateRecord
             $penerimaan = PenjualanPenjualanBarang::create($data);
 
             foreach ($data['products'] as $detailproduct) {
+                dd($detailproduct);
                 if ($detailproduct['qty'] <= 0) {
                     Notification::make()
                         ->title('Gagal menyimpan')
