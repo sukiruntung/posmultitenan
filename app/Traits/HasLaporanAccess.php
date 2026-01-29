@@ -20,7 +20,7 @@ trait HasLaporanAccess
             return;
         }
         $laporanAccesses = LaporanAccess::where('user_group_id', $this->user_group_id)
-            ->whereHas('laporan', function ($query) {
+            ->whereHas('laporan', function ($query) use ($user) {
                 $query->where('outlet_id', $user->userOutlet->outlet_id);
             })
             ->with([
