@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('payment_penerimaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('outlet_id')
-                ->constrained('outlets')
-                ->onDelete('cascade');
             $table->foreignId('penerimaan_barang_id')
                 ->constrained('penerimaan_barangs')
                 ->onDelete('cascade');

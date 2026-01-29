@@ -4,6 +4,7 @@ namespace App\Models\Accesses;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Traits\HasAuthOutlet;
 use App\Traits\HasDashboardAccess;
 use App\Traits\HasLaporanAccess;
 use App\Traits\HasMasterDataAccess;
@@ -21,7 +22,7 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes, HasMenuAccess, HasMasterDataAccess, HasDashboardAccess, HasLaporanAccess;
+    use HasFactory, Notifiable, SoftDeletes, HasMenuAccess, HasMasterDataAccess, HasDashboardAccess, HasLaporanAccess, HasAuthOutlet;
 
     /**
      * The attributes that are mass assignable.

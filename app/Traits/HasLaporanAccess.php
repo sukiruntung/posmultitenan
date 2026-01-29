@@ -9,7 +9,11 @@ trait HasLaporanAccess
 {
     public function cacheLaporanAccess()
     {
-        $cacheKeyHeader = "laporan_cache_user_group_{$this->user_group_id}:outlet_id:{$this->userOutlet->outlet_id}";
+        $user = $this->authUserWithOutlet();
+        if (!$user) {
+            return;
+        }
+        $cacheKeyHeader = "laporan_cache_user_group_{$this->user_group_id}:outlet_id:{$user->userOutlet->outlet_id}";
 
         // Cek Redis cache
         if (Cache::has($cacheKeyHeader)) {
@@ -17,11 +21,11 @@ trait HasLaporanAccess
         }
         $laporanAccesses = LaporanAccess::where('user_group_id', $this->user_group_id)
             ->whereHas('laporan', function ($query) {
-                $query->where('outlet_id', $this->userOutlet->outlet_id);
+                $query->where('outlet_id', $user->userOutlet->outlet_id);
             })
             ->with([
                 'laporan' => fn($query) =>
-                $query->where('outlet_id', $this->userOutlet->outlet_id),
+                $query->where('outlet_id', $user->userOutlet->outlet_id),
             ])
             ->get();
 
@@ -47,12 +51,20 @@ trait HasLaporanAccess
 
     public function getCachedLaporanAccess(int $userGroupId)
     {
-        return Cache::get("laporan_cache_user_group_{$userGroupId}:outlet_id:{$this->userOutlet->outlet_id}");
+        $user = $this->authUserWithOutlet();
+        if (!$user) {
+            return;
+        }
+        return Cache::get("laporan_cache_user_group_{$userGroupId}:outlet_id:{$user->userOutlet->outlet_id}");
     }
 
     public function clearLaporanAccessCache()
     {
-        $cacheKey = "laporan_cache_user_group_{$this->user_group_id}:outlet_id:{$this->userOutlet->outlet_id}";
+        $user = $this->authUserWithOutlet();
+        if (!$user) {
+            return;
+        }
+        $cacheKey = "laporan_cache_user_group_{$this->user_group_id}:outlet_id:{$user->userOutlet->outlet_id}";
         Cache::forget($cacheKey);
     }
 }
