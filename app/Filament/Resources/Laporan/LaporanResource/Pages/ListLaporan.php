@@ -21,7 +21,7 @@ class ListLaporan extends Page
     protected static string $resource = LaporanResource::class;
     protected static string $view = 'filament.resources.laporan.list-laporan';
     public int $userGroupId;
-    public ?int $outletID;
+    public ?int $outletID = null;
     public ?array $data = [];
     public ?array $laporanData = [];
     public array $laporanParams = [];
