@@ -168,8 +168,21 @@ class ValidatePenjualanBarang extends EditRecord
                     "Customer: {$this->record->customer->customer_name}\n" .
                     "Tanggal: " . now()->format('d-m-Y H:i') . "\n" .
                     "Terima kasih telah berbelanja di toko kami.\n";
+                $this->record->loadMissing('outlet.owner');
+                $ownerPhone = $this->record->outlet?->owner?->phone;
+
+                if (!$ownerPhone) {
+                    return;
+                }
+
+                $ownerPhone = preg_replace('/\D+/', '', $ownerPhone);
+
+                if (str_starts_with($ownerPhone, '0')) {
+                    $ownerPhone = '62' . substr($ownerPhone, 1);
+                }
+                
                 SendWaNotif::dispatch([
-                    'target' => '6281901233316',
+                    'target' => $ownerPhone,
                     'msg' => $msg,
                 ]);
             });

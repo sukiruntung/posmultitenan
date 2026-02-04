@@ -21,7 +21,7 @@ class Outlet extends Model
     ];
     public function owner()
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->belongsTo(User::class, 'owner_user_id');
     }
     public function user()
     {

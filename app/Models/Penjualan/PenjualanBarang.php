@@ -2,6 +2,7 @@
 
 namespace App\Models\Penjualan;
 
+use App\Models\Accesses\Outlet;
 use App\Models\Accesses\User;
 use App\Models\Mitra\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,6 +45,10 @@ class PenjualanBarang extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class);
     }
     public function paymentPenjualan()
     {
