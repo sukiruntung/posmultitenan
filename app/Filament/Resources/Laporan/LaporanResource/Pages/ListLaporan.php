@@ -21,6 +21,7 @@ class ListLaporan extends Page
     protected static string $resource = LaporanResource::class;
     protected static string $view = 'filament.resources.laporan.list-laporan';
     public int $userGroupId;
+    public int $outletID;
     public ?array $data = [];
     public ?array $laporanData = [];
     public array $laporanParams = [];
@@ -29,6 +30,7 @@ class ListLaporan extends Page
     public function mount(): void
     {
         $this->userGroupId = Auth::User()->user_group_id;
+        $this->outletID = Auth::User()->outlet_id;
 
         // muat daftar laporan yang user punya akses
         $this->loadLaporansForUser();
@@ -214,7 +216,7 @@ class ListLaporan extends Page
             . "&d={$db}"
             . "&p=" . implode('|', $paramNames) . '|POutletID'
             . "&t=" . implode('|', $paramTypes) . '|s'
-            . "&v=" . implode('|', $paramValues) . '|' . auth()->user()->outlet_id
+            . "&v=" . implode('|', $paramValues) . '|' . $this->outletID
             . "&u={$username}"
             . "&f=pdf&tm=" . now()->format('YmdHis');
     }
