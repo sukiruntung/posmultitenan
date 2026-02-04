@@ -212,9 +212,9 @@ class ListLaporan extends Page
         $this->url =
             "{$host}/rpt/?r={$this->data['path']}"
             . "&d={$db}"
-            . "&p=" . implode('|', $paramNames)
-            . "&t=" . implode('|', $paramTypes)
-            . "&v=" . implode('|', $paramValues)
+            . "&p=" . implode('|', $paramNames) . '|POutletID'
+            . "&t=" . implode('|', $paramTypes) . '|s'
+            . "&v=" . implode('|', $paramValues) . '|' . auth()->user()->outlet_id
             . "&u={$username}"
             . "&f=pdf&tm=" . now()->format('YmdHis');
     }
