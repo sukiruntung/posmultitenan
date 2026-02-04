@@ -30,7 +30,7 @@ class ListLaporan extends Page
     public function mount(): void
     {
         $this->userGroupId = Auth::User()->user_group_id;
-        $this->outletID = Auth::User()->outlet_id;
+        $this->outletID = Auth::User()->userOutlet->outlet_id;
 
         // muat daftar laporan yang user punya akses
         $this->loadLaporansForUser();
