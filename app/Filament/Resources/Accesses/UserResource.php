@@ -65,9 +65,9 @@ class UserResource extends Resource
         $userOutlet = $user->userOutlet ?? null;
 
         // Staff tidak bisa edit
-        if ($userOutlet && $userOutlet->role === 'staff') {
-            return false;
-        }
+        // if ($userOutlet && $userOutlet->role === 'staff') {
+        //     return false;
+        // }
 
         return static::checkMasterDataAccess('can_edit', static::$menuId);
     }
@@ -107,6 +107,7 @@ class UserResource extends Resource
                                 Forms\Components\Select::make('user_group_id')
                                     ->relationship('userGroup', 'user_groupname')
                                     ->required()
+                                    ->disabled(fn() => Auth::user()?->userOutlet?->role === 'staff')
                                     ->label('Group User'),
                             ]),
                         Forms\Components\Grid::make(2)
