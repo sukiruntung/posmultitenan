@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class HistoryProductStockResource extends Resource
@@ -31,26 +32,26 @@ class HistoryProductStockResource extends Resource
     protected static ?int $navigationSort = 2;
     public static function shouldRegisterNavigation(): bool
     {
-        return static::checkMasterDataAccess('can_view', static::$menuId);
+        return static::checkMenuAccess('can_view', static::$menuId);
     }
 
     public static function canAccess(): bool
     {
-        return static::checkMasterDataAccess('can_view', static::$menuId);
+        return static::checkMenuAccess('can_view', static::$menuId);
     }
 
     public static function canCreate(): bool
     {
-        return static::checkMasterDataAccess('can_create', static::$menuId);
+        return static::checkMenuAccess('can_create', static::$menuId);
     }
 
     public static function canEdit(Model $record): bool
     {
-        return static::checkMasterDataAccess('can_edit', static::$menuId);
+        return static::checkMenuAccess('can_edit', static::$menuId);
     }
     public static function canDelete(Model $record): bool
     {
-        return static::checkMasterDataAccess('can_delete', static::$menuId);
+        return static::checkMenuAccess('can_delete', static::$menuId);
     }
 
     public static function form(Form $form): Form
@@ -64,6 +65,9 @@ class HistoryProductStockResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null)
+            ->modifyQueryUsing(fn(Builder $query) => $query->whereHas('product', fn($q) => $q->where('outlet_id', Auth::user()->userOutlet->outlet_id)))
+
             ->columns([
                 TextColumn::make('product.product_name')
                     ->label('Product')

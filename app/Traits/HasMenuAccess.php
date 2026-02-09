@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Accesses\MenuAccess;
+use App\Scopes\ForAuthUserGroupScope;
 use Illuminate\Support\Facades\Cache;
 
 trait HasMenuAccess
@@ -19,7 +20,9 @@ trait HasMenuAccess
         if (Cache::has($cacheKeyHeader)) {
             return;
         }
-        $menuAccesses = MenuAccess::where('user_group_id', $this->user_group_id)->get();
+        $menuAccesses = MenuAccess::withGlobalScope('auth_group', new ForAuthUserGroupScope())
+            ->whereNull('deleted_at')
+            ->get();
         $menuIds = $menuAccesses->pluck('menu_id')->toArray();
         Cache::put("menu_access_ids:{$this->user_group_id}:outlet_id:{$user->userOutlet->outlet_id}", $menuIds, now()->addHours(9));
 

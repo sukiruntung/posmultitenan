@@ -28,7 +28,7 @@ return new class extends Migration
             $table->boolean('can_delete')->default(false);
             $table->timestamps();
             $table->softDeletes();
-            $table->unique(['master_data_id', 'user_group_id'], 'unique_master_data');
+            $table->unique(['master_data_id', 'user_group_id', 'outlet_id'], 'unique_master_data_user_group_outlet');
             $table->index(['deleted_at', 'created_at']);
         });
     }

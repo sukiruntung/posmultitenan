@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_kasir')->default(false)->index();
+            $table->boolean('is_owner')->default(false)->index();
             $table->rememberToken();
             $table->timestamps();
         });

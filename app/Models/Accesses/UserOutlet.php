@@ -18,6 +18,7 @@ class UserOutlet extends Model
     protected $fillable = [
         'user_id',
         'outlet_id',
+        'role',
     ];
     public function user()
     {

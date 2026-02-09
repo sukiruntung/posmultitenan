@@ -32,7 +32,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
-            $table->unique(['menu_id', 'user_group_id'], 'unique_menu_access');
+            $table->unique(['menu_id', 'user_group_id', 'outlet_id'], 'unique_menu_user_group_outlet');
             $table->index(['deleted_at', 'created_at']);
         });
     }
