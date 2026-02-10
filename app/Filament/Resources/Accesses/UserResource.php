@@ -257,8 +257,6 @@ class UserResource extends Resource
 
                             if ($record->userOutlet) {
                                 $record->userOutlet->update(['role' => $role]);
-
-                                // Update outlet jika role owner
                                 if ($role === 'owner' && $outletName) {
                                     $outlet = $record->userOutlet->outlet;
                                     if ($outlet) {
