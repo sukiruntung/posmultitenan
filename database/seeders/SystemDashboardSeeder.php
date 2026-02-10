@@ -33,6 +33,10 @@ class SystemDashboardSeeder extends Seeder
             'id' => 5,
             'system_dashboardname' => 'Daftar Produk ED / Kurang dari 1 Bulan',
             'user_id' => 1
+        ], [
+            'id' => 6,
+            'system_dashboardname' => 'Omset Semua Outlet',
+            'user_id' => 1
         ]]);
     }
 }

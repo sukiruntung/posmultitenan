@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\MinStockTable;
+use App\Filament\Widgets\OmsetOutletChart;
 use App\Filament\Widgets\OmsetWidget;
 use App\Filament\Widgets\TransaksiChart;
 use Filament\Pages\Dashboard as BaseDashboard;
@@ -18,6 +19,7 @@ class Dashboard extends BaseDashboard
         return [
             OmsetWidget::class,
             TransaksiChart::class,
+            OmsetOutletChart::class,
             MinStockTable::class,
         ];
     }
