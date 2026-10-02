@@ -1,1 +1,2 @@
 http://localhost:8080/reports/?r=postexample/rpt_penjualanbarangmulti&d=posmultitenan&p=PID|POutletID&v=11|4&t=s|s|s&u=untung&f=pdf&tm=20261002131345
+http://localhost/rpt/?r=postexample/rpt_penjualanbarangmulti&d=posmultitenan&p=PID|POutletID&v=11|4&t=s|s|s&u=untung&f=pdf&tm=20261002134641
